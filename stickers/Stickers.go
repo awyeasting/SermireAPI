@@ -8,8 +8,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	log "github.com/sirupsen/logrus"
 
-	"Sermire/APIServer/models"
-	"Sermire/APIServer/books"
+	"SermireAPI/models"
+	"SermireAPI/books"
 
 	"context"
 	"encoding/json"

@@ -6,11 +6,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	log "github.com/sirupsen/logrus"
 
-	"Sermire/APIServer/stickers"
-	"Sermire/APIServer/books"
-	"Sermire/APIServer/login"
-	"Sermire/APIServer/posts"
-	"Sermire/APIServer/db"
+	"SermireAPI/stickers"
+	"SermireAPI/books"
+	"SermireAPI/login"
+	"SermireAPI/posts"
+	"SermireAPI/db"
 
 	"context"
 	"net/http"

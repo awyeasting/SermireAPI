@@ -1,7 +1,7 @@
 package books
 
 import (
-	"Sermire/APIServer/models"
+	"SermireAPI/models"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"

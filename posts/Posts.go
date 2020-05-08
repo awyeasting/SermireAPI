@@ -9,8 +9,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	log "github.com/sirupsen/logrus"
 
-	"Sermire/APIServer/stickers"
-	"Sermire/APIServer/models"
+	"SermireAPI/stickers"
+	"SermireAPI/models"
 
 	"context"
 	"encoding/json"

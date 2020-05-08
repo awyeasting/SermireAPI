@@ -1,7 +1,7 @@
 package login
 
 import (
-	"Sermire/APIServer/models"
+	"SermireAPI/models"
 
 	"go.mongodb.org/mongo-driver/bson"
 	log "github.com/sirupsen/logrus"
