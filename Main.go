@@ -53,6 +53,8 @@ func main() {
 	r.Use(middleware.Timeout(REQUEST_TIMEOUT))
 	// Puts the database handle in request
 	r.Use(SetDatabaseContext(client))
+	// Configure CORS policy
+	r.Use(middleware.SetHeader("Access-Control-Allow-Origin", "*"))
 
 	// Mount the subrouters
 	r.Mount(STICKERS_PATH, stickers.StickerRouter())
