@@ -41,8 +41,10 @@ Stickers
 Users
 ```
 
+Optionally data can be exported to json from the live server and then imported locally (done easily using MongoDB Compass).
+
 After this simply run
 ```
 go build
 ```
-and launch the executable.
+and launch the executable. 
