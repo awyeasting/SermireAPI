@@ -27,3 +27,22 @@ Save and run
 go install
 ```
 Finally launch ```$(GOPATH)/bin/SermireApi```
+
+## Setup for Development
+
+First ensure that ```DEV=true``` is set in the HIDDEN_CONFIG.go file. 
+
+Then ensure that you have a working MongoDB instance on your computer with the ```MONGODB_CONN_INFO``` constant set to the mongodb connection string of that instance. In that instance create a ```Sermire``` database with the following collections
+
+```
+Books
+Posts
+Stickers
+Users
+```
+
+After this simply run
+```
+go build
+```
+and launch the executable.
