@@ -62,5 +62,9 @@ func main() {
 	r.Mount(LOGIN_PATH, login.LoginRouter())
 	r.Mount(POSTS_PATH, posts.PostsRouter())
 
-	http.ListenAndServe(SERVER_PORT, r)
+	if (DEV) {
+		http.ListenAndServe(SERVER_PORT, r)
+	} else {
+		http.ListenAndServeTLS(SERVER_PORT, TLS_CERT_PATH, TLS_KEY_PATH, r)
+	}
 }
