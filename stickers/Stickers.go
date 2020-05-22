@@ -23,6 +23,7 @@ func StickerRouter() http.Handler {
 	r.Use(middleware.AllowContentType("application/json"))
 
 	r.Get("/{" + STICKER_CODE_KEY + "}", StickerLookupHandler)
+	r.Get("/{" + STICKER_CODE_KEY + "}/book", StickerBookLookupHandler)
 	r.Post("/{" + STICKER_CODE_KEY + "}/{" + STICKER_BOOKID_KEY + "}", StickerUpdateHandler)
 
 	return r
@@ -70,6 +71,39 @@ func StickerLookupHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		json.NewEncoder(w).Encode(bson.M{STICKER_KEY: stickerjson})
+	}
+}
+
+// Performs sticker lookup on given code
+func StickerBookLookupHandler(w http.ResponseWriter, r *http.Request) {
+	// Get the stickers collection
+	StickerCol := GetStickerCollectionFromContext(r.Context())
+
+	// Pull the sticker code from the URL
+	stickerCode := chi.URLParam(r, STICKER_CODE_KEY)
+
+	// Pass the sticker code through lookup to find the sticker
+	sticker, err := StickerLookup(StickerCol, stickerCode)
+	if err != nil {
+		// Invalid sticker code
+		log.WithFields(log.Fields{STICKER_CODE_KEY: stickerCode}).Info(err)
+		w.WriteHeader(http.StatusNotFound)
+	} else{
+		var stickerjson models.StickerJSON
+
+		stickerjson.Id = sticker.Id.Hex()
+		stickerjson.Code = sticker.Code
+		if !sticker.BookId.IsZero() {
+			// Sticker assigned
+			book, err := books.BookLookup(books.GetBooksCollectionFromContext(r.Context()), sticker.BookId)
+			if err != nil {
+				log.Panic(err)
+			}
+			json.NewEncoder(w).Encode(bson.M{STICKER_BOOK_KEY: book})
+		} else {
+			// Sticker not assigned
+			json.NewEncoder(w).Encode(bson.M{STICKER_BOOK_KEY: nil})
+		}
 	}
 }
 

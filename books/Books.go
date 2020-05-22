@@ -154,9 +154,9 @@ func BookCreationHandler(w http.ResponseWriter, r *http.Request) {
 func CreateBook(col *mongo.Collection, title string, author string, publicationYear int64, recordLang string) error {
 	bookBSON := bson.D{{}}
 	if publicationYear != math.MinInt64 {
-		bookBSON = bson.D{{BOOKS_DB_TITLE_KEY, title}, {BOOKS_DB_AUTHOR_KEY, author}, {BOOKS_DB_PUBLICATION_YEAR_KEY, publicationYear}, {BOOKS_DB_RECORD_LANGUAGE_KEY, recordLang}}
+		bookBSON = bson.D{{BOOKS_DB_TITLE_KEY, title}, {BOOKS_DB_AUTHOR_KEY, author}, {BOOKS_DB_PUBLICATION_YEAR_KEY, publicationYear}, {BOOKS_DB_RECORD_LANGUAGE_KEY, recordLang}, {BOOKS_DB_ORIGINAL_KEY, nil}}
 	} else {
-		bookBSON = bson.D{{BOOKS_DB_TITLE_KEY, title}, {BOOKS_DB_AUTHOR_KEY, author}, {BOOKS_DB_RECORD_LANGUAGE_KEY, recordLang}}
+		bookBSON = bson.D{{BOOKS_DB_TITLE_KEY, title}, {BOOKS_DB_AUTHOR_KEY, author}, {BOOKS_DB_RECORD_LANGUAGE_KEY, recordLang}, {BOOKS_DB_ORIGINAL_KEY, nil}}
 	}
 
 	_, err := col.InsertOne(context.TODO(), bookBSON)

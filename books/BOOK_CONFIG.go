@@ -7,7 +7,7 @@ const(
 	BOOK_TITLE_KEY = "title"
 	BOOK_AUTHOR_KEY = "author"
 	BOOK_RECORD_LANGUAGE_KEY = "record_language"
-	BOOK_PUBLICATION_YEAR_KEY = "publcation_year"
+	BOOK_PUBLICATION_YEAR_KEY = "publication_year"
 
 	// Database Info
 	BOOKS_DB_NAME = "Sermire"
@@ -16,7 +16,8 @@ const(
 	BOOKS_DB_TITLE_KEY = "title"
 	BOOKS_DB_AUTHOR_KEY = "author"
 	BOOKS_DB_RECORD_LANGUAGE_KEY = "record_language"
-	BOOKS_DB_PUBLICATION_YEAR_KEY = "publcation_year"
+	BOOKS_DB_PUBLICATION_YEAR_KEY = "publication_year"
+	BOOKS_DB_ORIGINAL_KEY = "original"
 
 	// JSON Output
 	BOOK_KEY = "book"

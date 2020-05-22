@@ -14,6 +14,7 @@ const(
 		// JSON Errors
 		STICKER_ALREADY_SET_ERROR_MSG = "Sticker's book already set. Try petitioning change instead"
 		STICKERID_INVALID_ERROR_MSG = "Invalid book id"
+	STICKER_BOOK_KEY = "book"
 
 	// Routing Info
 	STICKER_CODE_KEY = "stickerCode"

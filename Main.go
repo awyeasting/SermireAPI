@@ -11,6 +11,7 @@ import (
 	"SermireAPI/login"
 	"SermireAPI/posts"
 	"SermireAPI/db"
+	"SermireAPI/users"
 
 	"context"
 	"net/http"
@@ -37,6 +38,16 @@ func init() {
 	log.SetLevel(log.InfoLevel)
 }
 
+func CORSHandler(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if (r.Method == "OPTIONS") {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+		} else {
+			h.ServeHTTP(w,r)
+		}
+	})
+}
+
 func main() {
 	r := chi.NewRouter()	
 
@@ -55,12 +66,14 @@ func main() {
 	r.Use(SetDatabaseContext(client))
 	// Configure CORS policy
 	r.Use(middleware.SetHeader("Access-Control-Allow-Origin", "*"))
+	r.Use(CORSHandler)
 
 	// Mount the subrouters
 	r.Mount(STICKERS_PATH, stickers.StickerRouter())
 	r.Mount(BOOKS_PATH, books.BooksRouter())
 	r.Mount(LOGIN_PATH, login.LoginRouter())
 	r.Mount(POSTS_PATH, posts.PostsRouter())
+	r.Mount(USERS_PATH, users.UsersRouter())
 
 	if (DEV) {
 		http.ListenAndServe(SERVER_PORT, r)

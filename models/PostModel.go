@@ -6,7 +6,9 @@ import (
 
 type Post struct {
 	Id 		primitive.ObjectID 	`bson:"_id"`
-	UserId	primitive.ObjectID 	`bson:"user_id"`
+	User	string 				`bson:"user"`
 	Text	string 				`bson:"text"`
-	CopyId	primitive.ObjectID 	`bson:"copy_id"`
+	Tags	[]string			`bson:"tags"`
+	Date	primitive.DateTime	`bson:"date"`
+	CopyId	primitive.ObjectID 	`bson:"copy"`
 }
