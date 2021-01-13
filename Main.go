@@ -59,6 +59,7 @@ func main() {
 	log.Info("Connected to database")
 
 	// Recovers from panics and returns an HTTP 500 status if possible
+	log.Info("Setting up middleware...")
 	r.Use(middleware.Recoverer)
 	// Times out requests if they go on too long
 	r.Use(middleware.Timeout(REQUEST_TIMEOUT))
@@ -69,15 +70,24 @@ func main() {
 	r.Use(CORSHandler)
 
 	// Mount the subrouters
+	log.Info("Mounting subrouters...")
 	r.Mount(STICKERS_PATH, stickers.StickerRouter())
 	r.Mount(BOOKS_PATH, books.BooksRouter())
 	r.Mount(LOGIN_PATH, login.LoginRouter())
 	r.Mount(POSTS_PATH, posts.PostsRouter())
 	r.Mount(USERS_PATH, users.UsersRouter())
 
+	log.Info("Listening...")
 	if (DEV) {
-		http.ListenAndServe(SERVER_PORT, r)
+		err := http.ListenAndServe(SERVER_PORT, r)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
-		http.ListenAndServeTLS(SERVER_PORT, TLS_CERT_PATH, TLS_KEY_PATH, r)
+		err := http.ListenAndServeTLS(SERVER_PORT, TLS_CERT_PATH, TLS_KEY_PATH, r)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
+
