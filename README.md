@@ -22,6 +22,16 @@ const (
 	DEV=?					// Mainly whether to use TLS or not
 )
 ```
+
+Also create a HIDDEN_CONFIG.go file with package login in the login directory with the following
+```go
+package login
+
+const(
+	JWT_SIGNING_SECRET="..."
+)
+```
+
 Save and run
 ```bash
 go install
